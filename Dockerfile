@@ -49,6 +49,10 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install OpenShift client (oc)
+RUN curl -sSL https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz \
+    | tar xz -C /bin/ oc kubectl
+
 # Copy binary from builder
 COPY --from=builder /build/target/release/goose /usr/local/bin/goose
 
